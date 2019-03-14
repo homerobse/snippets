@@ -1,0 +1,47 @@
+# Conclusions about how to import Python packages from inside other packages
+
+## Running at Pycharm with option "Add source roots to PYTHONPATH" and "Add content roots to PYTHONPATH"
+['/home/homero/dphil/snippets/proj-example/pkg_importer', '/home/homero/dphil/snippets/proj-example', '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages', '/snap/pycharm-professional/121/helpers/pycharm_matplotlib_backend']
+
+Process runs successfully!
+
+## Running at Pycharm with option "Add content roots to PYTHONPATH" 
+['/home/homero/dphil/snippets/proj-example/pkg_importer', '/home/homero/dphil/snippets/proj-example', '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages', '/snap/pycharm-professional/121/helpers/pycharm_matplotlib_backend']
+
+Process runs successfully!
+
+## Running at Pycharm with option "Add source roots to PYTHONPATH"
+['/home/homero/dphil/snippets/proj-example/pkg_importer', '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages', '/snap/pycharm-professional/121/helpers/pycharm_matplotlib_backend']
+
+Process fails with error ModuleNotFoundError: No module named 'pkg_imported'
+
+## Running on Pycharm with both options disabled
+['/home/homero/dphil/snippets/proj-example/pkg_importer', '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages', '/snap/pycharm-professional/121/helpers/pycharm_matplotlib_backend']
+
+Process fails with error ModuleNotFoundError: No module named 'pkg_imported'
+
+## Running on bash
+
+['/home/homero/dphil/snippets/proj-example/pkg_importer', '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages']
+
+Process fails with error ModuleNotFoundError: No module named 'pkg_imported'
+
+If I include 
+
+    dir_path = "/home/homero/dphil/snippets/proj-example"
+    sys.path.insert(0, dir_path)
+    
+Then it works.
+
+## \_\_init__.py files 
+Didn't make any difference.
+
+## Registering as package in PyPI
+
+I haven't tested, but this, supposedly, would be a solution:
+
+https://python-packaging.readthedocs.io/en/latest/minimal.html
+
+# Conclusions about how to import Python packages from a parent directory
+
+It works fine in all cases, no need for __init\_\_.py, nor the Pycharm options.
