@@ -1,0 +1,1 @@
+print('pkg_imported __init__ was run')

@@ -34,7 +34,11 @@ If I include
 Then it works.
 
 ## \_\_init__.py files 
-Didn't make any difference.
+The presence of the \_\_init__.py didn't make any difference for the import results.
+
+The code inside \_\_init__.py is run whenever any module inside the package folder is imported using an import statement 
+that makes reference to the pkg_imported package. If it is just `from module_imported import useful_func`, 
+then it won't run the \_\_init__.py 
 
 ## Registering as package in PyPI
 
