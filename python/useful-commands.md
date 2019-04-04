@@ -35,7 +35,12 @@ $ python -m ipykernel install --user --name myenv --display-name "Python (myenv)
 
 # Python
 
-Get the index of elements in an array with value 15
+## Get the index of elements in an array with value 15
 
     arr = np.array([15,1,15,20])
     result = np.where(arr == 15)
+
+## String format
+
+    x = 10
+    print(f'I have {x} pets')
