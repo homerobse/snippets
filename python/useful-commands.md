@@ -24,14 +24,14 @@ pip install -r requirements.txt
 
 ## remove
 
-$ conda env remove -n ENV_NAME
+`$ conda env remove -n ENV_NAME`
 
 ## Enable jupyter-notebook with a specific environment 
 ### https://stackoverflow.com/a/44786736/1273751
 
-$ conda activate myenv
-$ conda install ipykernel
-$ python -m ipykernel install --user --name myenv --display-name "Python (myenv)"
+    $ conda activate myenv
+    $ conda install ipykernel
+    $ python -m ipykernel install --user --name myenv --display-name "Python (myenv)"
 
 # Python
 
