@@ -1,26 +1,29 @@
 # virtualenv 
 
 ## create virtualenv
-$ virtualenv -p python3 envname
+`$ virtualenv -p python3 envname`
 
 or using conda and creating with some pre-installed pkgs
 
-$ conda create --name envname pkg1 pkg2 
+`$ conda create --name envname pkg1 pkg2 `
 
 ## activate
-$ source envname/bin/activate
+`$ source envname/bin/activate`
 
 with conda:
-$ conda activate <env-name>
+`$ conda activate <env-name>`
 
 ## deactivate
-$ deactivate
+`$ deactivate`
 
 with conda:
-$ conda deactivate <env-name>
+`$ conda deactivate <env-name>`
 
 ## install all requirements
 pip install -r requirements.txt
+
+with conda:
+`conda install --file requirements.txt`
 
 ## remove
 
