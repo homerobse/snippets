@@ -47,3 +47,9 @@ with conda:
 
     x = 10
     print(f'I have {x} pets')
+
+# Conda
+
+Install package using a specific channel. Search channel at https://anaconda.org/, then run:
+
+`conda install -c <channel> <package>`
