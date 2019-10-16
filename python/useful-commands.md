@@ -36,6 +36,15 @@ with conda:
     $ conda install ipykernel
     $ python -m ipykernel install --user --name myenv --display-name "Python (myenv)"
 
+# Jupyter notebook
+
+## use remote notebook https://amber-md.github.io/pytraj/latest/tutorials/remote_jupyter_notebook
+
+run on the remote server
+`jupyter-notebook --no-browser --port=8889`
+then locally:
+`ssh -N -f -L localhost:8888:localhost:8889 username@your_remote_host_name`
+
 # Python
 
 ## Get the index of elements in an array with value 15
