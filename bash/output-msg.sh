@@ -1,0 +1,3 @@
+cat <<EOM 
+hello
+EOM
