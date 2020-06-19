@@ -4,6 +4,8 @@ h Here: Place the figure in the text where the figure command is located. This o
 t Top: Place the figure at the top of a page.
 b Bottom: Place the figure at the bottom of a page25 .
 p Float Page: Place the figure on a page containing only floats.
-
+I.e. use in the code as following:
+`\begin{figure}[h]` or t, b, p in place of h
+]
 See Dropbox/oxford/notes/latex/epslatex-figure-handling.pdf
 
