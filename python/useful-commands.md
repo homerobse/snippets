@@ -20,7 +20,7 @@ with conda:
 `$ conda deactivate <env-name>`
 
 ## install all requirements
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 with conda:
 `conda install --file requirements.txt`
