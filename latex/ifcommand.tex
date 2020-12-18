@@ -1,0 +1,26 @@
+\documentclass{article}
+
+% I built this after looking this post https://tex.stackexchange.com/a/175921
+% maybe also check this https://tex.stackexchange.com/questions/286902/latex-if-condition
+
+\begin{document}
+	
+\newif\iffoo
+
+\footrue
+
+\iffoo
+foo is true
+\else
+foo is false
+\fi
+
+\foofalse
+
+\iffoo
+foo is true
+\else
+foo is false
+\fi
+	
+\end{document}
