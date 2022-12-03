@@ -1,2 +1,2 @@
 #!/bin/bash
-sed -i.baksh 's/oldtag/newtag/' eg_file
+sed -i.baksh 's/oldtag/newtag/' eg_file.txt
