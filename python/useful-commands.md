@@ -63,7 +63,7 @@ Then copy the token in the field in the local browser.
 
 -L local_socket:remote_socket
 
-What is option -L doing?
+Option -L: Specifies that connections to the given TCP port or Unix socket on the local (client) host are to be forwarded to the given host and port, or Unix socket, on the remote side.
 
 ---
 
