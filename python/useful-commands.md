@@ -47,7 +47,7 @@ Search channel at https://anaconda.org/, then run:
 ## use remote notebook https://amber-md.github.io/pytraj/latest/tutorials/remote_jupyter_notebook
 
 run on the remote server
-`jupyter-notebook --no-browser --port=8889`
+`jupyter-lab --no-browser --port=8889`
 then locally:
 `ssh -N -f -L localhost:8888:localhost:8889 username@your_remote_host_name`
 
@@ -57,24 +57,10 @@ Then copy the token in the field in the local browser.
 
 ---
 
--f: Requests ssh to go to background just before command execution
+-f: Requests ssh to go to background just before command execution (optional)
 
--N Do not execute a remote command.  This is useful for just forwarding ports.
+-N Do not execute a remote command.  This is useful for just forwarding ports.  (optional) # but maybe this prevents jupyter-lab from deleting files?
 
 -L local_socket:remote_socket
 
 Option -L: Specifies that connections to the given TCP port or Unix socket on the local (client) host are to be forwarded to the given host and port, or Unix socket, on the remote side.
-
----
-
-# Python
-
-## Get the index of elements in an array with value 15
-
-    arr = np.array([15,1,15,20])
-    result = np.where(arr == 15)
-
-## String format
-
-    x = 10
-    print(f'I have {x} pets')
