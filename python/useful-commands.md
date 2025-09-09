@@ -55,7 +55,7 @@ Or choose another local port instead of 8888. Eg. 9000 also works.
 
 Then copy the token in the field in the local browser.
 
----
+*Options:*
 
 -f: Requests ssh to go to background just before command execution (optional)
 
