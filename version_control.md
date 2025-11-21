@@ -1,6 +1,6 @@
 ## glossary
-* HEAD: a reference to the current commit on the currently checked-out branch.
-  - HEAD~1 (the previous commit [not the one we just made, but the one before that]), HEAD or HEAD~0
+* `HEAD`: a reference to the current commit on the currently checked-out branch (same as `HEAD~0`)
+  - `HEAD~1`: the previous commit (not the one we just made, but the one before that), same as `HEAD~`
   - Source: https://graphite.dev/guides/git-head, https://khambud.medium.com/head-and-head-in-git-655681c3237e
 * base revision of a file: used in merging conflicts, refers to the revision from which both conflicting versions are derived
 
@@ -17,11 +17,17 @@ or
 ### Download remote updates
 `git fetch --all` or `git remote update`,  Source: https://stackoverflow.com/a/78908960/1273751
 
+to download a remote branch, you need to do `git checkout <branch_name>` and git will create a new branch set up to track the remote one.
+
+### get SHA-ID of a commit
+    $ git rev-parse --short HEAD~1
+    2eab5481f2f0f61094c9a84a0a211fd12013c1d3
+
 ### git pull
 `git pull` is the exact same as `git fetch & git merge`
 
 ### git merge
-Merges the branch mentioned in the command into the checkout branch.
+Merges the branch mentioned in the command into the currently checked-out branch.
 E.g.: Merge the main branch into the feature branch
 `git checkout feature`
 `git merge main`
@@ -36,7 +42,10 @@ shows common ancestor
 `git merge-base HEAD~1 <commit 2 SHA1 ID>`, HEAD or HEAD~0 work too
 `git merge-base <branch name 1> <branch name 2>`
 
-TODO: add example output
+Example:
+
+    $ git merge-base HEAD~1 HEAD~0
+    2eab5481f2f0f61094c9a84a0a211fd12013c1d3
 
 ### git rebase
 `git checkout feature`
@@ -48,7 +57,12 @@ Golden rule of rebasing: never use it on public branches. Because rebase changes
 I think this is one way to update the feature branch if there has been updates to the main branch
 
 ### print git tree
-`git log --graph --pretty=oneline --abbrev-commit`, better version at: https://stackoverflow.com/a/2421063/1273751
+`git log --graph --pretty=oneline --abbrev-commit`, 
+or 
+`git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches`
+see more suggestions at: https://stackoverflow.com/a/2421063/1273751
+or
+`git show-tree` (install with `sudo apt install git-extras`)
 
 ## dealing with branches for each feature
 
@@ -98,7 +112,7 @@ G   H   I   J
          A
 
 
-A =      = A^0
+A =      = A^0     = A~0
 B = A^   = A^1     = A~1
 C = A^2
 D = A^^  = A^1^1   = A~2
@@ -146,8 +160,9 @@ https://www.reviewnb.com/git-jupyter-notebook-ultimate-guide (paid)
   - python module to clean notebooks
 * https://github.com/jupyter/nbdime or https://nbdime.readthedocs.io/en/latest/
   - `nbdime diff -MOD <notebook_name>.ipynb`
-    - MOD ignores metadata, outputs and details (details seems to ignore execution counts, not sure what else)
+    - MOD ignores M: metadata, O: outputs and D: details (details seems to ignore execution counts, not sure what else). Also available I: identifiers (not sure what it is for)
   - to compare two commits: `nbdiff -DOMI HEAD~ HEAD my_notebook.ipynb`  https://stackoverflow.com/a/78092838/1273751
+  - to compare two files: `nbdiff -MD <filepath1> <filepath2>` or `nbdiff-web -MD <filepath1> <filepath2>`
   - this can be configured to substitute git diff
     - `nbdime config-git --enable --global`
     - or maybe through `git difftool` as described above.
