@@ -48,6 +48,7 @@ Search channel at https://anaconda.org/, then run:
 
 run on the remote server
 `jupyter-lab --no-browser --port=8889`
+
 then locally:
 `ssh -N -f -L localhost:8888:localhost:8889 username@your_remote_host_name`
 
@@ -57,9 +58,9 @@ Then copy the token in the field in the local browser.
 
 *Options:*
 
--f: Requests ssh to go to background just before command execution (optional)
+-f: Requests ssh to go to ("fork into") background just before command execution (optional)
 
--N Do not execute a remote command.  This is useful for just forwarding ports.  (optional) # but maybe this prevents jupyter-lab from deleting files?
+-N Do not execute a remote command.  This is useful for just forwarding ports.  (optional) # this is not what prevents jupyter-lab from deleting files, even without this it can't delete ("Delete Failed" - send2trash failed: [Errno 13] Permission denied: b'/nadata/cnl/home/.Trash-1897')
 
 -L local_socket:remote_socket
 
