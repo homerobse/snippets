@@ -32,7 +32,7 @@ E.g.: Merge the main branch into the feature branch
 `git checkout feature`
 `git merge main`
 is the same as 
-`git merge feature main`
+`git merge feature main`, i.e. `git <branch-to-receive-merge> <source-branch>`
 https://www.atlassian.com/git/tutorials/using-branches/git-merge
 https://graphite.dev/guides/git-fast-forward-merge
 
