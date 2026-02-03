@@ -7,4 +7,4 @@
 
 
 def useful_func():
-    print('My name is useful_func and I am in: pkg_imported/module_imported.py!')
+    print('useful_func was run in: pkg_imported/module_imported.py!')

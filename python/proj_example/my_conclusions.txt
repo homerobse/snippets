@@ -1,0 +1,72 @@
+# Conclusions about how to import Python packages from inside other packages
+
+## Running at Pycharm with option "Add source roots to PYTHONPATH" and "Add content roots to PYTHONPATH"
+    ['/home/homero/dphil/snippets/proj-example/pkg_importer', '/home/homero/dphil/snippets/proj-example', 
+    '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages', '/snap/pycharm-professional/121/helpers/pycharm_matplotlib_backend']
+
+Process runs successfully!
+
+## Running at Pycharm with option "Add content roots to PYTHONPATH" 
+    ['/home/homero/dphil/snippets/proj-example/pkg_importer', '/home/homero/dphil/snippets/proj-example', 
+    '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages', '/snap/pycharm-professional/121/helpers/pycharm_matplotlib_backend']
+
+Process runs successfully!
+
+## Running at Pycharm with option "Add source roots to PYTHONPATH"
+    ['/home/homero/dphil/snippets/proj-example/pkg_importer', 
+    '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages', '/snap/pycharm-professional/121/helpers/pycharm_matplotlib_backend']
+
+Process fails with error ModuleNotFoundError: No module named 'pkg_imported'
+
+Because it did not have the folder: `'/home/homero/dphil/snippets/proj-example'` in PYTHONPATH.
+
+## Running on Pycharm with both options disabled
+    ['/home/homero/dphil/snippets/proj-example/pkg_importer', 
+    '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages', '/snap/pycharm-professional/121/helpers/pycharm_matplotlib_backend']
+
+Process fails with error ModuleNotFoundError: No module named 'pkg_imported'
+
+Because it did not have the folder: `'/home/homero/dphil/snippets/proj-example'` in PYTHONPATH.
+
+## Running on bash
+
+    ['/home/homero/dphil/snippets/proj-example/pkg_importer', 
+    '/home/homero/miniconda3/lib/python37.zip', '/home/homero/miniconda3/lib/python3.7', '/home/homero/miniconda3/lib/python3.7/lib-dynload', '/home/homero/miniconda3/lib/python3.7/site-packages']
+
+Process fails with error ModuleNotFoundError: No module named 'pkg_imported'
+
+If I include the root folder into PYTHONPATH
+
+    dir_path = "/home/homero/dphil/snippets/proj-example"
+    sys.path.insert(0, dir_path)
+    
+Then it works. `pkg_imported` needs to be findable in PYTHONPATH, and it is when we add the root folder.
+
+## `__init__.py` files 
+The presence of the `__init__.py` didn't make any difference for the import results.
+
+The code inside `__init__.py` is run whenever any module inside the package folder is imported using an 
+import statement that makes reference to the `pkg_imported` package. If it is just 
+`from module_imported import useful_func`, then it won't run the `__init__.py` 
+
+## Registering as package in PyPI
+
+I haven't tested, but this, supposedly, would be a solution:
+
+https://python-packaging.readthedocs.io/en/latest/minimal.html
+
+# Conclusions about how to import Python packages from a parent directory
+
+It works fine in all cases, no need for `__init__.py`, nor the Pycharm options.
+
+Qa: but then when is `__init__.py` really necessary for packaging? I've seen it give warning when the `__init__.py` is not there (2025-11-20)...
+
+# Relative import
+
+When you run `import my_module` it assumes `my_module` is findable in sys.path (PYTHONPATH)
+
+A relative import is relative to the current package (i.e. the folder where the current file is in), even if that folder is not directly in the PYTHONPATH.
+
+Python uses dots to specify the level of the parent directory in `from ..xxx import xxx` statements, but not with a bare `import ..xxx`
+
+In relative imports to the parent folder `from ..parent_folder import module_root` the python call has to be done from above the parent folder, i.e. `$ python -m parent_folder.pkg_a.module_root_relative_importer`.
