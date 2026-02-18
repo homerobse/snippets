@@ -56,6 +56,20 @@ Golden rule of rebasing: never use it on public branches. Because rebase changes
 
 I think this is one way to update the feature branch if there has been updates to the main branch
 
+### local clean up (uses rebase)
+
+To edit more commits than `git ammend`, which only deals with the latest, we can do:
+
+`git rebase -i HEAD~3`, will allow to edit the last 3 commits
+
+If these changes have already been pushed to Github, you will need to do a force push: `git push origin feature-branch --force-with-lease`
+
+And if anyone else in the team has the old commit history, they will also need to do a special pull:
+
+`git fetch origin`
+`git reset --hard origin/<branch-name>`
+
+
 ### print git tree
 `git log --graph --pretty=oneline --abbrev-commit`, 
 or 
@@ -91,13 +105,6 @@ If there are any new changes to main (in our case, master) that should be incorp
 `git checkout new-feature`, then either `git rebase main` or `git merge main`
 Then continue developing the feature in your branch.
 Later when it is ready, we do as above: Merge it into main by doing git checkout main  then git merge new-feature.
-
-## local clean up
-
-To edit more commits than `git ammend`, which only deals with the latest, we can do:
-
-`git rebase -i HEAD~3`, will allow to edit the last 3 commits
-
 
 ## how to refer to specific commits
 G   H   I   J
@@ -162,7 +169,11 @@ https://www.reviewnb.com/git-jupyter-notebook-ultimate-guide (paid)
   - `nbdime diff -MOD <notebook_name>.ipynb`
     - MOD ignores M: metadata, O: outputs and D: details (details seems to ignore execution counts, not sure what else). Also available I: identifiers (not sure what it is for)
   - to compare two commits: `nbdiff -DOMI HEAD~ HEAD my_notebook.ipynb`  https://stackoverflow.com/a/78092838/1273751
-  - to compare two files: `nbdiff -MD <filepath1> <filepath2>` or `nbdiff-web -MD <filepath1> <filepath2>`
+  - to check how current file is different from HEAD
+    `nbdiff-web -MD <filename>`
+  - to compare two files: 
+    - `nbdiff -MD <filepath1> <filepath2>` or 
+    - `nbdiff-web -MD <filepath1> <filepath2>`
   - this can be configured to substitute git diff
     - `nbdime config-git --enable --global`
     - or maybe through `git difftool` as described above.
